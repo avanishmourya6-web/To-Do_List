@@ -1,278 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enhanced To-Do List</title>
-  <style>
-    /* Google Fonts Import for a modern look */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enhanced To-Do List</title>
+    <style>
+      /* Google Fonts Import for a modern look */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      color: #333;
-    }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        color: #333;
+        height: 100%;
+        flex-direction: column;
+      }
 
-    .container {
-      width: 90%;
-      max-width: 550px;
-      background: #ffffff;
-      padding: 40px;
-      margin: 40px auto;
-      border-radius: 15px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      text-align: center;
-      animation: fadeIn 0.8s ease-in-out;
-    }
+      .container {
+        width: 90%;
+        max-width: 550px;
+        background: #ffffff;
+        padding: 40px;
+        margin: 40px auto;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.8s ease-in-out;
+        flex: 1; /* takes remaining vertical space, pushes footer down */
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    h1 {
-      margin-bottom: 30px;
-      color: #1a202c;
-      font-weight: 600;
-      font-size: 2rem;
-    }
+      h1 {
+        margin-bottom: 30px;
+        color: #1a202c;
+        font-weight: 600;
+        font-size: 2rem;
+      }
 
-    .input-container {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
+      .input-container {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
 
-    .input-container input {
-      flex-grow: 1;
-      padding: 15px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+      .input-container input {
+        flex-grow: 1;
+        padding: 15px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
 
-    .input-container input:focus {
-      outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
-    }
+      .input-container input:focus {
+        outline: none;
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+      }
 
-    .input-container button {
-      padding: 15px 25px;
-      border: none;
-      background: #4a90e2;
-      color: #fff;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
+      .input-container button {
+        padding: 15px 25px;
+        border: none;
+        background: #4a90e2;
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
 
-    .input-container button:hover {
-      background: #357abd;
-    }
+      .input-container button:hover {
+        background: #357abd;
+      }
 
-    .input-container button:active {
-      transform: scale(0.98);
-    }
+      .input-container button:active {
+        transform: scale(0.98);
+      }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-    li {
-      background: #f8fafc;
-      padding: 18px;
-      margin: 12px 0;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
+      li {
+        background: #f8fafc;
+        padding: 18px;
+        margin: 12px 0;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease, transform 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
 
-    li:hover {
-      background: #edf2f7;
-      transform: translateY(-3px);
-    }
+      li:hover {
+        background: #edf2f7;
+        transform: translateY(-3px);
+      }
 
-    li.completed {
-      text-decoration: line-through;
-      color: #a0aec0;
-      background: #e2e8f0;
-    }
+      li.completed {
+        text-decoration: line-through;
+        color: #a0aec0;
+        background: #e2e8f0;
+      }
 
-    .task-text {
-      flex-grow: 1;
-      text-align: left;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+      .task-text {
+        flex-grow: 1;
+        text-align: left;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
 
-    li.completed .task-text {
-      color: #a0aec0;
-    }
+      li.completed .task-text {
+        color: #a0aec0;
+      }
 
-    .buttons-container {
-      display: flex;
-      gap: 10px;
-    }
+      .buttons-container {
+        display: flex;
+        gap: 10px;
+      }
 
-    .buttons-container button {
-      background: none;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: color 0.3s ease;
-      padding: 0;
-    }
+      .buttons-container button {
+        background: none;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        padding: 0;
+      }
 
-    .buttons-container .edit-btn {
-      color: #4a90e2;
-    }
+      .buttons-container .edit-btn {
+        color: #4a90e2;
+      }
 
-    .buttons-container .edit-btn:hover {
-      color: #357abd;
-    }
+      .buttons-container .edit-btn:hover {
+        color: #357abd;
+      }
 
-    .buttons-container .del-btn {
-      color: #e53e3e;
-    }
+      .buttons-container .del-btn {
+        color: #e53e3e;
+      }
 
-    .buttons-container .del-btn:hover {
-      color: #c53030;
-    }
-     footer {
-      margin-top: 36px;
-      text-align: center;
-      color: rgba(255,255,255,0.73);
-      font-size: 14px;
-     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>To-Do List</h1>
-    <div class="input-container">
-      <input id="taskinput" type="text" placeholder="Enter new task">
-      <button id="addBtn">Add</button>
-    </div>
-    <ul id="tasklist"></ul>
-  </div>
-  <footer>
-      <div>
-        © <span id="year"></span> Avnish_TO-DO-list • Built with HTML/CSS/JS
+      .buttons-container .del-btn:hover {
+        color: #c53030;
+      }
+      .footer {
+        text-align: center;
+        font-size: 14px;
+        padding: 20px 0;
+        color: #555;
+      }
+    @media (max-width: 400px) {
+  .input-container {
+    flex-direction: column;
+  }
+  .input-container input, 
+  .input-container button {
+    width: 100%;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <div class="input-container">
+        <input id="taskinput" type="text" placeholder="Enter new task" />
+        <button id="addBtn">Add</button>
       </div>
+      <ul id="tasklist"></ul>
+    </div>
+      
+    <footer>
+      <div class="footer">
+        © <span id="year"></span> Avnish_TO-DO-list • Built with HTML/CSS/JS
+         </div>
     </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("cityInput").focus();
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    const input = document.getElementById("taskinput");
-    const list = document.getElementById("tasklist");
-    const addBtn = document.getElementById("addBtn");
+      const input = document.getElementById("taskinput");
+      const list = document.getElementById("tasklist");
+      const addBtn = document.getElementById("addBtn");
 
-    function saveTasks() {
-      const tasks = [];
-      list.querySelectorAll('li').forEach(li => {
-        const taskText = li.querySelector('.task-text').textContent;
-        const isCompleted = li.classList.contains("completed");
-        tasks.push({ text: taskText, completed: isCompleted });
-      });
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-
-    function loadTasks() {
-      const storedTasks = localStorage.getItem('tasks');
-      if (storedTasks) {
-        JSON.parse(storedTasks).forEach(task => {
-          addTaskToDOM(task.text, task.completed);
+      function saveTasks() {
+        const tasks = [];
+        list.querySelectorAll("li").forEach((li) => {
+          const taskText = li.querySelector(".task-text").textContent;
+          const isCompleted = li.classList.contains("completed");
+          tasks.push({ text: taskText, completed: isCompleted });
         });
-      }
-    }
-
-    function addTaskToDOM(taskText, isCompleted = false) {
-      const li = document.createElement("li");
-      
-      const taskSpan = document.createElement("span");
-      taskSpan.className = "task-text";
-      taskSpan.textContent = taskText;
-      
-      const buttonsContainer = document.createElement("div");
-      buttonsContainer.className = "buttons-container";
-
-      const editBtn = document.createElement("button");
-      editBtn.className = "edit-btn";
-      editBtn.textContent = "Edit";
-      
-      const delBtn = document.createElement("button");
-      delBtn.className = "del-btn";
-      delBtn.textContent = "X";
-      
-      li.appendChild(taskSpan);
-      buttonsContainer.appendChild(editBtn);
-      buttonsContainer.appendChild(delBtn);
-      li.appendChild(buttonsContainer);
-
-      if (isCompleted) {
-        li.classList.add("completed");
+        localStorage.setItem("tasks", JSON.stringify(tasks));
       }
 
-      li.addEventListener("click", (e) => {
-        if (!e.target.closest('.buttons-container')) {
-          li.classList.toggle("completed");
-          saveTasks();
+      function loadTasks() {
+        const storedTasks = localStorage.getItem("tasks");
+        if (storedTasks) {
+          JSON.parse(storedTasks).forEach((task) => {
+            addTaskToDOM(task.text, task.completed);
+          });
         }
-      });
+      }
 
-      delBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        li.remove();
+      function addTaskToDOM(taskText, isCompleted = false) {
+        const li = document.createElement("li");
+
+        const taskSpan = document.createElement("span");
+        taskSpan.className = "task-text";
+        taskSpan.textContent = taskText;
+
+        const buttonsContainer = document.createElement("div");
+        buttonsContainer.className = "buttons-container";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "edit-btn";
+        editBtn.textContent = "Edit";
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "del-btn";
+        delBtn.textContent = "X";
+
+        li.appendChild(taskSpan);
+        buttonsContainer.appendChild(editBtn);
+        buttonsContainer.appendChild(delBtn);
+        li.appendChild(buttonsContainer);
+
+        if (isCompleted) {
+          li.classList.add("completed");
+        }
+
+        li.addEventListener("click", (e) => {
+          if (!e.target.closest(".buttons-container")) {
+            li.classList.toggle("completed");
+            saveTasks();
+          }
+        });
+
+        delBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          li.remove();
+          saveTasks();
+        });
+
+        editBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const currentText = taskSpan.textContent;
+          const newText = prompt("Edit your task:", currentText);
+          if (newText !== null && newText.trim() !== "") {
+            taskSpan.textContent = newText.trim();
+            saveTasks();
+          }
+        });
+
+        list.appendChild(li);
+      }
+
+      function handleAddTask() {
+        const task = input.value.trim();
+        if (task === "") return;
+
+        addTaskToDOM(task);
         saveTasks();
+        input.value = "";
+      }
+
+      addBtn.addEventListener("click", handleAddTask);
+
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleAddTask();
       });
 
-      editBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const currentText = taskSpan.textContent;
-        const newText = prompt("Edit your task:", currentText);
-        if (newText !== null && newText.trim() !== "") {
-          taskSpan.textContent = newText.trim();
-          saveTasks();
-        }
-      });
-
-      list.appendChild(li);
-    }
-
-    function handleAddTask() {
-      const task = input.value.trim();
-      if (task === "") return;
-      
-      addTaskToDOM(task);
-      saveTasks();
-      input.value = "";
-    }
-
-    addBtn.addEventListener("click", handleAddTask);
-
-    input.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") handleAddTask();
-    });
-
-    window.addEventListener('load', loadTasks);
-  </script>
-</body>
+      window.addEventListener("load", loadTasks);
+    </script>
+  </body>
 </html>
